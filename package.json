@@ -1,0 +1,19 @@
+{
+  "name": "tdd-training",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pzurowski/sages-tdd-angular.git"
+  },
+  "author": "Paweł Żurowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pzurowski/sages-tdd-angular/issues"
+  },
+  "homepage": "https://github.com/pzurowski/sages-tdd-angular#readme"
+}
