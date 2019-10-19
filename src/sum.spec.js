@@ -10,5 +10,11 @@ describe('sum', () => {
 
     expect(result).toEqual(8);
   });
+
+  it('should add one number',()=>{
+    const result = sum(8);
+
+    expect(result).toEqual(8);
+  });
 });
 
