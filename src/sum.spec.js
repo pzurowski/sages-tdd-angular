@@ -16,5 +16,11 @@ describe('sum', () => {
 
     expect(result).toEqual(8);
   });
+
+  it('should add no number',()=>{
+    const result = sum();
+
+    expect(result).toEqual(0);
+  });
 });
 
