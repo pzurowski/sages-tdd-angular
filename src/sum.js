@@ -1,3 +1,3 @@
 function sum(a, b) {
-  return a + b;
+  return Decimal.add(a, b).toNumber();
 }
