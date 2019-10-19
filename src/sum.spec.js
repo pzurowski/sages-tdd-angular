@@ -22,5 +22,11 @@ describe('sum', () => {
 
     expect(result).toEqual(0);
   });
+
+  it('should add three numbers', () => {
+    const result = sum(5, 8, 13);
+
+    expect(result).toEqual(26);
+  });
 });
 
