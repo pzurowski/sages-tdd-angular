@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/pzurowski/sages-tdd-angular/issues"
   },
-  "homepage": "https://github.com/pzurowski/sages-tdd-angular#readme"
+  "homepage": "https://github.com/pzurowski/sages-tdd-angular#readme",
+  "devDependencies": {
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^2.0.1"
+  }
 }
