@@ -4,5 +4,11 @@ describe('sum', () => {
 
     expect(result).toEqual(3);
   });
+
+  it('should add other numbers', ()=>{
+    const result = sum(3,5);
+
+    expect(result).toEqual(8);
+  });
 });
 
