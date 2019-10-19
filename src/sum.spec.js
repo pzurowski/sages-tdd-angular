@@ -28,5 +28,13 @@ describe('sum', () => {
 
     expect(result).toEqual(26);
   });
+
+  it('should add thousand numbers', () => {
+    const args = Array.from({length: 1000}, () => 1);
+
+    const result = sum(...args);
+
+    expect(result).toEqual(1000);
+  });
 });
 
