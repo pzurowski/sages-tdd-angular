@@ -16,6 +16,13 @@ function extendedValidatePesel(s) {
   if (!errors.length && !validatePeselChecksum(s)) {
     errors.push('checksum')
   }
+  if (!errors.length) {
+    const [_, y, m, d] = s.match(/(..)(..)(..)/);
+    let date = new Date(`19${y}-${m}-${d}T00:00:00Z`);
+    if (date.toJSON() !== `19${y}-${m}-${d}T00:00:00.000Z`) {
+      errors.push('date');
+    }
+  }
 
   return {result: !errors.length, errors};
 }

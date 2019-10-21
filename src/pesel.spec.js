@@ -59,6 +59,11 @@ describe('pesel validity function', () => {
     const result = extendedValidatePesel('62111111111');
 
     expect(result.errors).toContain('checksum');
-  })
+  });
 
+  it('should complain about bad date', () => {
+    const result = extendedValidatePesel('11116111111');
+
+    expect(result.errors).toContain('date');
+  });
 });
