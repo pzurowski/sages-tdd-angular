@@ -53,6 +53,12 @@ describe('pesel validity function', () => {
 
     expect(result.result).toEqual(false);
     expect(result.errors).toContain('nonDigit');
+  });
+
+  it('should complain about wrong checksum', ()=>{
+    const result = extendedValidatePesel('62111111111');
+
+    expect(result.errors).toContain('checksum');
   })
 
 });
