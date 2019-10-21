@@ -36,5 +36,23 @@ describe('pesel validity function', () => {
     expect(result).toEqual({result: true, errors:[]});
   });
 
+  it('should not accepts non-digits chars',()=>{
+    const result = validatePesel('abcdefghijk');
+
+    expect(result).toEqual(false);
+  });
+
+  it('should not accepts non-digits chars 2',()=>{
+    const result = validatePesel('3bcdefghijk');
+
+    expect(result).toEqual(false);
+  });
+
+  it('should complain about non-digit chars',()=>{
+    const result = extendedValidatePesel('3bcdef');
+
+    expect(result.result).toEqual(false);
+    expect(result.errors).toContain('nonDigit');
+  })
 
 });

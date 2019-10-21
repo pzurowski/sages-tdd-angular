@@ -10,5 +10,8 @@ function extendedValidatePesel(s) {
   if (s.length > 11) {
     errors.push('long');
   }
+  if (/[^0-9]/.test(s)) {
+    errors.push('nonDigit');
+  }
   return {result: !errors.length, errors};
 }
