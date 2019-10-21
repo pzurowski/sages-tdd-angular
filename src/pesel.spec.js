@@ -66,4 +66,10 @@ describe('pesel validity function', () => {
 
     expect(result.errors).toContain('date');
   });
+
+  it('should not complain about date from other century', () => {
+    const result = extendedValidatePesel('22222222222');
+
+    expect(result.errors).not.toContain('date');
+  });
 });
