@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TheServiceService } from './the-service.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ export class AppComponent {
   title = 'tdd';
   currentUser: string;
   profile: any;
+
+  profile$ = this.dataService.fetchProfile('3');
 
   constructor(private dataService: TheServiceService) {
 

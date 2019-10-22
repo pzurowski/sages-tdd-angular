@@ -7,6 +7,8 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
+import 'jasmine-marbles';
+
 declare const require: any;
 
 // First, initialize the Angular testing environment.

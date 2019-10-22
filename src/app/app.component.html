@@ -4,4 +4,5 @@
 <input #password >
 <button (click)="signIn(username.value,password.value)">sign in</button>
 <button (click)="fetchProfile()">fetch profile</button>
-<pre>{{ profile | json}}</pre>
+<!--<pre>{{ profile | json}}</pre>-->
+<pre>{{ profile$ | async | json }}</pre>

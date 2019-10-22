@@ -1,13 +1,18 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TheServiceService } from './the-service.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { hot } from 'jasmine-marbles';
+import { TheServiceMockService } from './the-service.mock.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[ HttpClientTestingModule],
+      providers: [
+        {provide: TheServiceService, useClass: TheServiceMockService}
+      ],
       declarations: [
         AppComponent
       ],
@@ -49,5 +54,16 @@ describe('AppComponent', () => {
 
     expect(dataService.fetchProfile).toHaveBeenCalledWith('user');
     expect(app.profile).toEqual({profile: 'aaa'})
+  })
+
+  it('should fetch current user profile', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+
+    app.signIn('user', 'password');
+
+    expect(app.profile$).toBeObservable(hot('---(a|)', { a: { profile: 'aaa' } }));
+    // expect(dataService.fetchProfile).toHaveBeenCalledWith('user');
+    // expect(app.profile).toEqual({profile: 'aaa'})
   })
 });
