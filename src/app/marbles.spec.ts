@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
-import { cold, hot } from 'jasmine-marbles';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { cold, getTestScheduler, hot } from 'jasmine-marbles';
+import { delay, map, mergeMap, tap } from 'rxjs/operators';
 
 describe('marbles', () => {
 
@@ -28,25 +28,25 @@ describe('marbles', () => {
     }));
   });
 
-  // it('3', () => {
-  //   const stream = hot('--a---b--', {
-  //     a: 1,
-  //     b: 3,
-  //   });
-  //
-  //   const output = stream.pipe(
-  //     map(x => 2 * x),
-  //     delay(30),
-  //   );
-  //
-  //   expect(output).toBeObservable(hot('-----a---b--', {
-  //     a: 2,
-  //     b: 6,
-  //   }));
-  // });
+  it('3', () => {
+    const stream = hot('--a---b--', {
+      a: 1,
+      b: 3,
+    });
+
+    const output = stream.pipe(
+      map(x => 2 * x),
+      delay(30, getTestScheduler()),
+    );
+
+    expect(output).toBeObservable(hot('-----a---b--', {
+      a: 2,
+      b: 6,
+    }));
+  });
 
 
-  it('2', () => {
+  it('4', () => {
     const stream = hot('--a---b--', {
       a: 1,
       b: 3,
@@ -63,7 +63,7 @@ describe('marbles', () => {
     }));
   });
 
-  it('3', () => {
+  it('5', () => {
     const stream = hot('--a---b--');
     const output = stream.pipe(
       tap(x => {
