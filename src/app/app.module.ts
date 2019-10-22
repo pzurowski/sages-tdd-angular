@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { defaultRandomFn, randomFnToken } from './random';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {provide: randomFnToken, useValue: defaultRandomFn},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

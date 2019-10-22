@@ -5,13 +5,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { hot } from 'jasmine-marbles';
 import { TheServiceMockService } from './the-service.mock.service';
+import { defaultRandomFn, randomFnToken } from './random';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[ HttpClientTestingModule],
       providers: [
-        {provide: TheServiceService, useClass: TheServiceMockService}
+        {provide: TheServiceService, useClass: TheServiceMockService},
+        {provide: randomFnToken, useValue: ()=>0.3},
+
       ],
       declarations: [
         AppComponent

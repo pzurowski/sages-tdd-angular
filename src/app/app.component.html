@@ -1,8 +1,4 @@
 
-
-<input #username >
-<input #password >
-<button (click)="signIn(username.value,password.value)">sign in</button>
-<button (click)="fetchProfile()">fetch profile</button>
-<!--<pre>{{ profile | json}}</pre>-->
-<pre>{{ profile$ | async | json }}</pre>
+<app-sign-in [profile]="profile$|async"
+             (fetchProfile)="fetchProfile()"
+             (signIn)="signIn($event.username, $event.password)"></app-sign-in>

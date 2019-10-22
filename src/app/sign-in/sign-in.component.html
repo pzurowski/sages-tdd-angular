@@ -1,0 +1,8 @@
+
+<div>
+  <input #username >
+  <input #password >
+  <button (click)="signIn.emit({username:username.value,password:password.value})">sign in</button>
+  <button (click)="fetchProfile.emit()">fetch profile</button>
+  <pre>{{ profile }}</pre>
+</div>
