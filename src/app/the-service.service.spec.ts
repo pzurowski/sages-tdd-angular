@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TheServiceService } from './the-service.service';
+import { hot } from 'jasmine-marbles';
+import { merge } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 
 describe('TheServiceService', () => {
   let service: TheServiceService;
@@ -58,5 +61,36 @@ describe('TheServiceService', () => {
     req.flush({});
     expect(result).toEqual([{}])
   });
+
+  it('should store current currency', () => {
+    const result = service.currency$;
+
+    expect(result).toBeObservable(hot('a------', { a: 'USD' }));
+  });
+
+  it('should change a currency', () => {
+    const result = merge(
+      hot('---x').pipe(
+        tap(() => service.changeCurrency('PLN')),
+        filter(() => false),
+      ),
+      service.currency$,
+    );
+
+    expect(result).toBeObservable(hot('a--b---', { a: 'USD', b: 'PLN' }));
+  });
+
+  it('should not change to the same currency', () => {
+    const result = merge(
+      hot('---x----x--').pipe(
+        tap(() => service.changeCurrency('PLN')),
+        filter(() => false),
+      ),
+      service.currency$,
+    );
+
+    expect(result).toBeObservable(hot('a--b---', { a: 'USD', b: 'PLN' }));
+  });
+
 
 });

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheServiceService {
+  private _currency$ = new BehaviorSubject( 'USD')
+  currency$: Observable<string> = this._currency$.asObservable().pipe(
+    distinctUntilChanged()
+  );
 
   constructor(private httpClient: HttpClient) {
   }
@@ -22,5 +29,9 @@ export class TheServiceService {
 
   fetchProfile(user: string) {
     return this.httpClient.get(`https://swapi.co/api/people/${user}`)
+  }
+
+  changeCurrency(currency: string) {
+    this._currency$.next(currency);
   }
 }
