@@ -2,3 +2,8 @@
 <app-sign-in [profile]="profile$|async"
              (fetchProfile)="fetchProfile()"
              (signIn)="signIn($event.username, $event.password)"></app-sign-in>
+
+
+<div *ngIf="delay$ | async">
+  informacja
+</div>

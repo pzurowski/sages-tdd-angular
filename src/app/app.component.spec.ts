@@ -1,19 +1,24 @@
 import { async, TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { AppComponent, infoDelayTime, schedulerToken } from './app.component';
 import { TheServiceService } from './the-service.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-import { hot } from 'jasmine-marbles';
+import { getTestScheduler, hot } from 'jasmine-marbles';
 import { TheServiceMockService } from './the-service.mock.service';
-import { defaultRandomFn, randomFnToken } from './random';
+import { randomFnToken } from './random';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AsyncScheduler } from 'rxjs/internal/scheduler/AsyncScheduler';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[ HttpClientTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         {provide: TheServiceService, useClass: TheServiceMockService},
         {provide: randomFnToken, useValue: ()=>0.3},
+        { provide: schedulerToken, useValue: getTestScheduler() },
+        { provide: infoDelayTime, useValue: 80 },
 
       ],
       declarations: [
@@ -69,4 +74,14 @@ describe('AppComponent', () => {
     // expect(dataService.fetchProfile).toHaveBeenCalledWith('user');
     // expect(app.profile).toEqual({profile: 'aaa'})
   })
+
+  it('should show info box after given timeout', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+
+    const result = app.delay$;
+
+    expect(result).toBeObservable(hot('--------(t|)', { t: true }));
+
+  });
 });
