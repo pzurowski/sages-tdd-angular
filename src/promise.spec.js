@@ -5,7 +5,7 @@ function pass(v) {
 }
 
 describe('promise testing', () => {
-  it('INVALID - does not enter in promise', () => {
+  xit('INVALID - does not enter in promise', () => {
     let a = 4;
     pass().then(() => {
       expect(a).toEqual(9);
@@ -13,13 +13,13 @@ describe('promise testing', () => {
     a = 5
   });
 
-  it('VALID, but breaks AAA rule', (done) => {
+  fit('VALID, but breaks AAA rule', (done) => {
     let a = 4;
     pass().then(() => {
       expect(a).toEqual(9);
       done();
     });
-    a = 5
+    a = 9
   });
 
   it('VALID and conforms AAA rule, but looks ugly', (done) => {
@@ -28,7 +28,7 @@ describe('promise testing', () => {
     pass().then(() => {
       asserts(a);
     });
-    a = 5;
+    a = 9;
 
     function asserts(result) {
       expect(result).toEqual(9);
@@ -40,19 +40,18 @@ describe('promise testing', () => {
     let a = 4;
 
     const result = pass();
-    a = 5;
+    a = 9;
 
-    result.then(() => {
-      expect(a).toEqual(9);
-      done();
-    });
+    result
+      .then(()=>expect(a).toEqual(9))
+      .then(done);
   });
 
-  it('also VALID and conforms AAA rule and almost pretty', () => {
+  fit('also VALID and conforms AAA rule and almost pretty', () => {
     let a = 4;
 
     const thePromise = pass();
-    a = 5;
+    a = 9;
 
     return thePromise.then(() => {
       expect(a).toEqual(9);
@@ -63,13 +62,13 @@ describe('promise testing', () => {
     let a = 4;
 
     await pass();
-    a = 5;
+    a =9;
 
     expect(a).toEqual(9);
   });
 
   // INVALID -- provided done without invocation
-  it('should not work and shows why it is invalid xxx', async (done) => {
+  fit('should not work and shows why it is invalid xxx', async (done) => {
     let a = 4;
 
     await pass();
